@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Ray>
+	<Age>32</Age>
+	<Contact>
+		<cell>123-456-7890</cell>
+		<email>lrm0617@gmail.com</email>
+	</Contact>
+	<Height>5'8"</Height>
+</Ray>
+<Sofya>
+	<Age>30</Age>
+	<Height>5'4"</Height>
+	<SpecialTest>and='&amp;'; greater_than='&gt;'; less_than='&lt;'; space:' '</SpecialTest>
+</Sofya>
