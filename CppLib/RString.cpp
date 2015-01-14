@@ -1,10 +1,13 @@
-#include "RString.h"
+#define _CRT_SECURE_NO_WARNINGS		// for wctomb
 
+#include "RString.h"
+#include <memory>
 #ifdef _WIN32
 #include <Windows.h>
 // just use WideCharToMultiByte and MultiByteToWideChar
+#else
+#include <stdlib.h>
 #endif
-
 namespace rl
 {
 
@@ -33,9 +36,27 @@ std::string WcsToStr(const std::wstring& wcs)
 #else
 std::wstring StrToWcs(const std::string& str)
 {
+	std::wstring wcs;
+	std::unique_ptr<wchar_t[]> buf(new wchar_t[16]);
+	for (size_t i = 0; i < str.size(); i++)
+	{
+		int wlen = mbtowc(buf.get(), &str[i], str.size() - i);
+		buf.get()[wlen] = L'\0';
+		wcs += buf.get();
+	}
+	return wcs;
 }
 std::string WcsToStr(const std::wstring& wcs)
 {
+	std::string str;
+	std::unique_ptr<char[]> buf(new char[16]);
+	for (auto wch : wcs)
+	{
+		int len = wctomb(buf.get(), wch);
+		buf.get()[len] = '\0';
+		str += buf.get();
+	}
+	return str;
 }
 #endif
 

@@ -15,9 +15,6 @@ std::wstring ToWcs(const std::wstring& wcs);
 template<typename T>
 T ToTempStr(const std::string& str);
 
-//template std::string ToTempStr<std::string>(const std::string& str);
-//template std::wstring ToTempStr<std::wstring>(const std::string& str);
-
 #ifdef _UNICODE
 #define ToTStr ToWcs
 #else

@@ -26,7 +26,7 @@ bool TestRDatabase()
 	shared_ptr<RDatabase> db2 = make_shared<RDatabase>();
 	assert( db2->Load(_T("Test\\TestRDatabase1.txt")) );
 	assert(db2->Get(_T("Ray")) != person1);
-	assert(*db2->Get(_T("Ray")) == *person1);
+	assert(*(db2->Get(_T("Ray")).get()) == *person1);
 	assert(*db2->Get(_T("Sofya")) == *person2);
 	assert((*db2->Get(_T("Ray")))[_T("Contact")][_T("cell")].GetValue() == _T("123-456-7890"));
 	assert(db2->Get(_T("Sofya"))->GetAttribute(_T("SpecialTest"))->GetValue() == _T("and='&'; greater_than='>'; less_than='<'; space:' '"));
