@@ -11,25 +11,28 @@ RObjectT<T>::RObjectT()
 }
 
 template<typename T>
-RObjectT<T>::RObjectT(const T& value)
-	: m_value(value)
+RObjectT<T>::RObjectT(const T& name, const T& value)
+	: m_name(name)
+	, m_value(value)
 {
 }
 
 template<typename T>
 RObjectT<T>::RObjectT(const RObjectT& copy)
 {
-	m_value = copy.m_value;
-	for (auto it = copy.m_attributes.begin(); it != copy.m_attributes.end(); it++)
-	{
-		m_attributes[it->first] = it->second->Clone();
-	}
+	*this = *copy.Clone();
 }
 
 // destructor
 template<typename T>
 RObjectT<T>::~RObjectT()
 {
+}
+
+template<typename T>
+void RObjectT<T>::SetName(const T& name)
+{
+	m_name = name;
 }
 
 template<typename T>
@@ -41,19 +44,25 @@ void RObjectT<T>::SetValue(const T& value)
 template<typename T>
 void RObjectT<T>::SetAttribute(const T& name, const T& value)
 {
-	m_attributes[name] = std::shared_ptr<RObjectT>(new RObjectT(value));
+	m_attributes[name] = std::shared_ptr<RObjectT>(new RObjectT(name, value));
 }
 
 template<typename T>
-void RObjectT<T>::SetAttribute(const T& name, std::shared_ptr<RObjectT> object)
+void RObjectT<T>::SetAttribute(std::shared_ptr<RObjectT> object)
 {
-	m_attributes[name] = object;
+	m_attributes[object->GetName()] = object;
 }
 
 template<typename T>
-void RObjectT<T>::CopyAttribute(const T& name, const RObjectT& object)
+void RObjectT<T>::CopyAttribute(const RObjectT& object)
 {
-	m_attributes[name] = object.Clone();
+	m_attributes[object.GetName()] = object.Clone();
+}
+
+template<typename T>
+T RObjectT<T>::GetName() const
+{
+	return m_name;
 }
 
 template<typename T>
@@ -78,15 +87,22 @@ std::shared_ptr<RObjectT<T>> RObjectT<T>::GetAttribute(const T& name) const
 }
 
 template<typename T>
-std::shared_ptr<RObjectT<T>> RObjectT<T>::Clone() const
+std::shared_ptr<RObjectT<T> > RObjectT<T>::Clone() const
 {
-	return std::shared_ptr<RObjectT<T>>(new RObjectT(*this));
+	std::shared_ptr<RObjectT<T> > clone = std::make_shared<RObjectT<T> >();
+	clone->m_name = m_name;
+	clone->m_value = m_value;
+	for (auto it = m_attributes.begin(); it != m_attributes.end(); it++)
+	{
+		clone->m_attributes[it->first] = it->second->Clone();
+	}
+	return clone;
 }
 
 template<typename T>
 bool RObjectT<T>::IsEqual(const RObjectT& object) const
 {
-	if (m_value != object.m_value)
+	if (m_name != object.m_name || m_value != object.m_value)
 		return false;
 	if (m_attributes.size() != object.m_attributes.size())
 		return false;

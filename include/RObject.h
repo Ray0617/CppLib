@@ -11,13 +11,15 @@ class RObjectT
 {
 public:
 	RObjectT();
-	RObjectT(const T& value);
-	RObjectT(const RObjectT& value);
+	RObjectT(const T& name, const T& value);
+	RObjectT(const RObjectT& object);
 	~RObjectT();
+	void SetName(const T& name);
 	void SetValue(const T& value);
 	void SetAttribute(const T& name, const T& value);
-	void SetAttribute(const T& name, std::shared_ptr<RObjectT> object);
-	void CopyAttribute(const T& name, const RObjectT& object);
+	void SetAttribute(std::shared_ptr<RObjectT> object);
+	void CopyAttribute(const RObjectT& object);
+	T GetName() const;
 	T GetValue() const;
 	RObjectT& operator[](const T& name) const;
 	std::shared_ptr<RObjectT> GetAttribute(const T& name) const;
@@ -25,6 +27,7 @@ public:
 	bool IsEqual(const RObjectT& object) const;
 	bool operator==(const RObjectT& object) const;
 private:
+	T m_name;
 	T m_value;
 	std::map<T, std::shared_ptr<RObjectT> > m_attributes;
 };
