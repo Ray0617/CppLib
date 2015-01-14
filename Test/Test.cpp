@@ -8,10 +8,14 @@
 using namespace rl;
 
 bool TestRObject();
+bool TestRDatabase();
+bool TestRString();
 
 int main()
 {
 	_CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG)|_CRTDBG_LEAK_CHECK_DF);
 	assert( TestRObject() );
+	assert( TestRDatabase() );
+	assert( TestRString() );
 	return 0;
 }

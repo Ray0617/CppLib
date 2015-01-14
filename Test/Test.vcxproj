@@ -83,7 +83,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Test.cpp" />
+    <ClCompile Include="TestDatabase.cpp" />
     <ClCompile Include="TestRObject.cpp" />
+    <ClCompile Include="TestRString.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

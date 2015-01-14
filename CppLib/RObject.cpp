@@ -14,6 +14,7 @@ template<typename T>
 RObjectT<T>::RObjectT(const T& name, const T& value)
 	: m_name(name)
 	, m_value(value)
+	, m_iter(m_attributes.end())
 {
 }
 
@@ -44,19 +45,22 @@ void RObjectT<T>::SetValue(const T& value)
 template<typename T>
 void RObjectT<T>::SetAttribute(const T& name, const T& value)
 {
-	m_attributes[name] = std::shared_ptr<RObjectT>(new RObjectT(name, value));
+	SetAttribute(std::make_shared<RObjectT<T> >(name, value));
 }
 
 template<typename T>
 void RObjectT<T>::SetAttribute(std::shared_ptr<RObjectT> object)
 {
+	bool existed = (m_attributes.find(object->GetName()) != m_attributes.end());
 	m_attributes[object->GetName()] = object;
+	if (!existed)
+		m_iter = m_attributes.end();
 }
 
 template<typename T>
 void RObjectT<T>::CopyAttribute(const RObjectT& object)
 {
-	m_attributes[object.GetName()] = object.Clone();
+	SetAttribute(object.Clone());
 }
 
 template<typename T>
@@ -118,6 +122,32 @@ template<typename T>
 bool RObjectT<T>::operator==(const RObjectT& object) const
 {
 	return IsEqual(object);
+}
+
+template<typename T>
+bool RObjectT<T>::IsEmpty() const
+{
+	return m_name.empty() && m_value.empty() && m_attributes.empty();
+}
+
+template<typename T>
+std::shared_ptr<RObjectT<T> > RObjectT<T>::FirstAttribute()
+{
+	if (m_attributes.empty())
+		return std::make_shared<RObjectT<T> >();
+	m_iter = m_attributes.begin();
+	return m_iter->second;
+}
+
+template<typename T>
+std::shared_ptr<RObjectT<T> > RObjectT<T>::NextAttribute()
+{
+	if (m_iter == m_attributes.end())
+		return std::make_shared<RObjectT<T> >();
+	m_iter++;
+	if (m_iter == m_attributes.end())
+		return std::make_shared<RObjectT<T> >();
+	return m_iter->second;
 }
 
 template class RObjectT<std::string>;

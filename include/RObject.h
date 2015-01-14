@@ -26,10 +26,15 @@ public:
 	std::shared_ptr<RObjectT> Clone() const;
 	bool IsEqual(const RObjectT& object) const;
 	bool operator==(const RObjectT& object) const;
+	bool IsEmpty() const;
+	
+	std::shared_ptr<RObjectT<T> > FirstAttribute();
+	std::shared_ptr<RObjectT<T> > NextAttribute();
 private:
 	T m_name;
 	T m_value;
 	std::map<T, std::shared_ptr<RObjectT> > m_attributes;
+	typename std::map<T, std::shared_ptr<RObjectT> >::iterator m_iter;
 };
 
 typedef RObjectT<std::string> RObjectA;

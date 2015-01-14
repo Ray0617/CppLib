@@ -1,27 +1,34 @@
 #pragma once
 #include <string>
-#include <map>
+#include <vector>
+#include <memory>
 #include "RObject.h"
+
+// NOTE: do 
 
 namespace rl
 {
 
-class RRecord	// row
+template<typename T>
+class RDatabaseT
 {
 public:
-	void Set(const std::string& column, const std::string& value);
-	std::string Get(const std::string& column);
+	RDatabaseT();
+	~RDatabaseT();
+	bool Load(const T& filename);
+	bool Save(const T& filename);
+	void Set(std::shared_ptr<RObjectT<T> > object);
+	std::shared_ptr<RObjectT<T> > Get(const T& name);
 private:
-	std::map<std::string, std::string> m_columns;
+	std::shared_ptr<RObjectT<T> > m_data;
 };
 
-class RDatabase
-{
-public:
-	bool Load(const std::string& filename);
-	bool Save(const std::string& filename);
-private:
-	RObject m_root;
-};
+typedef RDatabaseT<std::string> RDatabaseA;
+typedef RDatabaseT<std::wstring> RDatabaseW;
+#ifdef _UNICODE
+#define RDatabase RDatabaseW
+#else
+#define RDatabase RDatabaseA
+#endif
 
 };	// namespace rl

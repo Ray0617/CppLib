@@ -16,6 +16,9 @@
     <Filter Include="include">
       <UniqueIdentifier>{4fdd49d9-7ceb-4611-85c8-d5c18a3c372c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="pugixml">
+      <UniqueIdentifier>{fc7c0856-6711-4172-bbf8-db192288d032}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\RDatabase.h">
@@ -27,6 +30,15 @@
     <ClInclude Include="..\include\Rtchar.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\RString.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\pugixml\src\pugiconfig.hpp">
+      <Filter>pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\pugixml\src\pugixml.hpp">
+      <Filter>pugixml</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RDatabase.cpp">
@@ -34,6 +46,12 @@
     </ClCompile>
     <ClCompile Include="RObject.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\pugixml\src\pugixml.cpp">
+      <Filter>pugixml</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

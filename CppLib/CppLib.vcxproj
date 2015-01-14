@@ -66,12 +66,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\pugixml\src\pugixml.cpp" />
     <ClCompile Include="RDatabase.cpp" />
     <ClCompile Include="RObject.cpp" />
+    <ClCompile Include="RString.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\pugixml\src\pugiconfig.hpp" />
+    <ClInclude Include="..\..\pugixml\src\pugixml.hpp" />
     <ClInclude Include="..\include\RDatabase.h" />
     <ClInclude Include="..\include\RObject.h" />
+    <ClInclude Include="..\include\RString.h" />
     <ClInclude Include="..\include\Rtchar.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
