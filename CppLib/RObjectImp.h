@@ -150,7 +150,4 @@ std::shared_ptr<RObjectT<T> > RObjectT<T>::NextAttribute()
 	return m_iter->second;
 }
 
-template class RObjectT<std::string>;
-template class RObjectT<std::wstring>;
-
 };

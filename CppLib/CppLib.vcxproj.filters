@@ -39,12 +39,15 @@
     <ClInclude Include="..\..\pugixml\src\pugixml.hpp">
       <Filter>pugixml</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\RMenu.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="RObjectImp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RDatabase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RString.cpp">
@@ -52,6 +55,15 @@
     </ClCompile>
     <ClCompile Include="..\..\pugixml\src\pugixml.cpp">
       <Filter>pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="RMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RObjectA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RObjectW.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
