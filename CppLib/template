@@ -1,0 +1,16 @@
+#include "RMyClass.h"
+
+namespace rl
+{
+
+// constructor
+RMyClass::RMyClass()
+{
+}
+
+// destructor
+RMyClass::~RMyClass()
+{
+}
+
+};	// namespace rl

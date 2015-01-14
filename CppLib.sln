@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppLib", "CppLib\CppLib.vcxproj", "{B6AD4F96-C4F7-4C10-A11D-D6F52BC26C0D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Test\Test.vcxproj", "{B398F955-8533-472D-839D-9E6724169EE7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B6AD4F96-C4F7-4C10-A11D-D6F52BC26C0D} = {B6AD4F96-C4F7-4C10-A11D-D6F52BC26C0D}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6AD4F96-C4F7-4C10-A11D-D6F52BC26C0D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B6AD4F96-C4F7-4C10-A11D-D6F52BC26C0D}.Debug|Win32.Build.0 = Debug|Win32
+		{B6AD4F96-C4F7-4C10-A11D-D6F52BC26C0D}.Release|Win32.ActiveCfg = Release|Win32
+		{B6AD4F96-C4F7-4C10-A11D-D6F52BC26C0D}.Release|Win32.Build.0 = Release|Win32
+		{B398F955-8533-472D-839D-9E6724169EE7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B398F955-8533-472D-839D-9E6724169EE7}.Debug|Win32.Build.0 = Debug|Win32
+		{B398F955-8533-472D-839D-9E6724169EE7}.Release|Win32.ActiveCfg = Release|Win32
+		{B398F955-8533-472D-839D-9E6724169EE7}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
