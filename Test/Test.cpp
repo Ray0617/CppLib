@@ -10,10 +10,12 @@ using namespace rl;
 bool TestRObject();
 bool TestRDatabase();
 bool TestRString();
+bool TestRMenu();
 
 int main()
 {
 	_CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG)|_CRTDBG_LEAK_CHECK_DF);
+	assert( TestRMenu() );
 	assert( TestRString() );
 	assert( TestRObject() );
 	assert( TestRDatabase() );

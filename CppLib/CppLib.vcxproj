@@ -68,7 +68,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\pugixml\src\pugixml.cpp" />
     <ClCompile Include="RDatabase.cpp" />
-    <ClCompile Include="RMenu.cpp" />
+    <ClCompile Include="RMenuA.cpp" />
+    <ClCompile Include="RMenuW.cpp" />
     <ClCompile Include="RObjectA.cpp" />
     <ClCompile Include="RObjectW.cpp" />
     <ClCompile Include="RString.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="..\include\RObject.h" />
     <ClInclude Include="..\include\RString.h" />
     <ClInclude Include="..\include\Rtchar.h" />
+    <ClInclude Include="RMenuImp.h" />
     <ClInclude Include="RObjectImp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

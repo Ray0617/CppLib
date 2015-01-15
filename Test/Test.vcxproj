@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="TestDatabase.cpp" />
+    <ClCompile Include="TestRMenu.cpp" />
     <ClCompile Include="TestRObject.cpp" />
     <ClCompile Include="TestRString.cpp" />
   </ItemGroup>
