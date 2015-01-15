@@ -21,5 +21,6 @@ bool TestRString()
 	assert(ToTStr(tstr) == _T("test"));
 	assert(Sprintf("%s%d", str.c_str(), 1) == "test1");
 	assert(Sprintf(L"%s%d", wcs.c_str(), 2) == L"test2");
+	assert(trim(" \t123 \t456\n \t ") == "123 \t456");
 	return true;
 }

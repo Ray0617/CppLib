@@ -31,7 +31,7 @@ void LoadNode(pugi::xml_node& node, shared_ptr<RObjectT<T> > obj)
 	{
 		if (child_node.type() == pugi::node_pcdata)
 		{
-			obj->SetValue(ToTempStr<T>(child_node.value()));
+			obj->SetValue(ToTempStr<T>(trim(child_node.value())));
 		}
 		else
 		{
@@ -91,6 +91,37 @@ std::shared_ptr<RObjectT<T> > RDatabaseT<T>::Get(const T& name)
 		return m_data->GetAttribute(name);
 	else
 		return std::shared_ptr<RObjectT<T> >();
+}
+template<typename T>
+std::shared_ptr<RObjectT<T> > RDatabaseT<T>::First()
+{
+	return m_data->FirstAttribute();
+}
+
+template<typename T>
+std::shared_ptr<RObjectT<T> > RDatabaseT<T>::Next()
+{
+	return m_data->NextAttribute();
+}
+
+template<typename T>
+std::shared_ptr<RDatabaseT<T> > RDatabaseT<T>::Filter(FilterFuncPtr filter)
+{
+	std::shared_ptr<RDatabaseT<T> > ret = make_shared<RDatabaseT<T> >();
+	std::shared_ptr<RObjectT<T> > rec = First();
+	while (!rec->IsEmpty())
+	{
+		if (filter(rec))
+			ret->Set(rec);
+		rec = Next();
+	}
+	return ret;
+}
+
+template<typename T>
+size_t RDatabaseT<T>::Size()
+{
+	return m_data->AttributeSize();
 }
 
 template class RDatabaseT<std::string>;

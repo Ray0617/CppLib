@@ -27,6 +27,7 @@ public:
 	bool IsEqual(const RObjectT& object) const;
 	bool operator==(const RObjectT& object) const;
 	bool IsEmpty() const;
+	size_t AttributeSize() const;
 	
 	std::shared_ptr<RObjectT<T> > FirstAttribute();
 	std::shared_ptr<RObjectT<T> > NextAttribute();

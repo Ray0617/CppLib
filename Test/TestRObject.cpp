@@ -39,6 +39,7 @@ bool TestRObject()
 	assert(pobj1->GetValue() == _T("test1"));
 	shared_ptr<RObject> pobj2(new RObject(_T("obj2"), _T("test2")));
 	shared_ptr<RObject> pobj3(new RObject(*pobj2));	// clone; not suggested
+	assert(pobj3->GetName() == pobj2->GetName());
 	assert(pobj3->GetValue() == pobj2->GetValue());
 	pobj3->SetValue(_T("test3"));
 	assert(pobj2->GetValue() == _T("test2"));	// value of different object should be independent
@@ -51,6 +52,13 @@ bool TestRObject()
 	pobj3->SetAttribute(pobj1);	// pobj3["attr1"] are exactly the same with pobj1
 	assert((*pobj3)[_T("obj1")] == *pobj1);
 	assert(pobj3->GetAttribute(_T("obj1")) == pobj1);
+
+	auto attr = pobj3->FirstAttribute();	// sorted
+	assert(attr->GetName() == _T("obj1"));
+	assert(attr->GetValue() == _T("test1"));
+	attr = pobj3->NextAttribute();
+	assert(attr->IsEmpty());
+	assert(pobj3->AttributeSize() == 1);
 
 	// to sum up, shared_ptr and SetAttribute is suggested;
 	// handy one (for simple use) is to use RObject directly and CopyAttribute, 

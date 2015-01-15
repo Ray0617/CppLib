@@ -131,6 +131,12 @@ bool RObjectT<T>::IsEmpty() const
 }
 
 template<typename T>
+size_t RObjectT<T>::AttributeSize() const
+{
+	return m_attributes.size();
+}
+
+template<typename T>
 std::shared_ptr<RObjectT<T> > RObjectT<T>::FirstAttribute()
 {
 	if (m_attributes.empty())

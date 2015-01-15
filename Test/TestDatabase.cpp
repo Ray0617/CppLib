@@ -5,6 +5,11 @@
 using namespace std;
 using namespace rl;
 
+bool FindSofya(shared_ptr<RObject> obj)
+{
+	return (obj->GetName() == _T("Sofya"));
+}
+
 bool TestRDatabase()
 {
 	RDatabase db1;
@@ -21,6 +26,9 @@ bool TestRDatabase()
 	person2->SetAttribute(_T("SpecialTest"), _T("and='&'; greater_than='>'; less_than='<'; space:' '"));
 	db1.Set(person1);
 	db1.Set(person2);
+	shared_ptr<RObject> test = make_shared<RObject>(_T("name"), _T("value"));
+	test->SetAttribute(_T("attr1"), _T("value1"));
+	db1.Set(test);
 	assert( db1.Save(_T("Test\\TestRDatabase1.txt")) );	// note: directory Test must be existed
 
 	shared_ptr<RDatabase> db2 = make_shared<RDatabase>();
@@ -30,5 +38,10 @@ bool TestRDatabase()
 	assert(*db2->Get(_T("Sofya")) == *person2);
 	assert((*db2->Get(_T("Ray")))[_T("Contact")][_T("cell")].GetValue() == _T("123-456-7890"));
 	assert(db2->Get(_T("Sofya"))->GetAttribute(_T("SpecialTest"))->GetValue() == _T("and='&'; greater_than='>'; less_than='<'; space:' '"));
+	db2->Save(_T("Test\\TestRDatabase2.txt"));
+
+	auto filter = db2->Filter(FindSofya);
+	assert(filter->Size() == 1);
+	assert(*(filter->First().get()) == *person2);
 	return true;
 }

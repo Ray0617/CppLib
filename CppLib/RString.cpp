@@ -3,6 +3,10 @@
 #include "RString.h"
 #include <memory>
 #include <stdio.h>
+#include <algorithm> 
+#include <functional> 
+#include <cctype>
+#include <locale>
 #ifdef _WIN32
 #include "snprintf.h"
 #include <Windows.h>
@@ -116,6 +120,26 @@ std::wstring Sprintf(const wchar_t* fmt, ...)
 	}
     va_end(ap);
 	return wcs.get();
+}
+
+// ref http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
+// trim from start
+std::string ltrim(const std::string& str) {
+	std::string ret = str;
+	ret.erase(ret.begin(), std::find_if(ret.begin(), ret.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+	return ret;
+}
+
+// trim from end
+std::string rtrim(const std::string& str) {
+	std::string ret = str;
+	ret.erase(std::find_if(ret.rbegin(), ret.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), ret.end());
+	return ret;
+}
+
+// trim from both ends
+std::string trim(const std::string &s) {
+        return ltrim(rtrim(s));
 }
 
 template <> 
