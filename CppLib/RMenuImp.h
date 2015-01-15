@@ -31,6 +31,8 @@ template<typename T>
 RMenuT<T>::RMenuT()
 	: m_item_width(DEFAULT_ITEM_WIDTH)
 	, m_select(0)
+	, m_info(nullptr)
+	, m_info_arg(nullptr)
 {
 }
 
@@ -53,6 +55,13 @@ void RMenuT<T>::SetSelect(unsigned select)
 }
 
 template<typename T>
+void RMenuT<T>::SetInfo(MenuInfoFuncPtr info, void* info_arg)
+{
+	m_info = info;
+	m_info_arg = info_arg;
+}
+
+template<typename T>
 void RMenuT<T>::Add(const T& name, MenuItemFuncPtr func, void* arg)
 {
 	shared_ptr<RMenuItem> item = make_shared<RMenuItem>(name, func, arg);
@@ -67,7 +76,7 @@ void RMenuT<T>::AddHotkey(int key, MenuItemFuncPtr func, void* arg)
 }
 
 template<typename T>
-void RMenuT<T>::Run()
+int RMenuT<T>::Run()
 {
 	do
 	{
@@ -116,7 +125,7 @@ void RMenuT<T>::Run()
 			{
 				int ret = m_items[m_select]->Select();
 				if (ret == BREAK)
-					break;
+					return m_select;
 			}
 		}
 		else
@@ -126,7 +135,7 @@ void RMenuT<T>::Run()
 			{
 				int ret = it->second->Select();
 				if (ret == BREAK)
-					break;
+					return cmd;
 			}
 		}
 	}
@@ -137,6 +146,8 @@ template<typename T>
 void RMenuT<T>::Show()
 {
 	tcout << T(MAX_COLUMNS_PER_SCREEN, _T('\n'));
+	if (m_info)
+		tcout << m_info(m_info_arg) << endl;
 	int columns = MAX_CHARPERLINE / m_item_width;
 	int id = 0;
 	for (auto it : m_items)
