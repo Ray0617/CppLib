@@ -72,10 +72,10 @@ void RMenuT<T>::Run()
 	do
 	{
 		Show();
-		int cmd = getchar();
+		int cmd = _getche();
 		if (cmd == 224)
 		{
-			cmd = getchar();	// Up, Down, Left, Right, Home, End, PgDn, PgUp, ...etc
+			cmd = _getche();	// Up, Down, Left, Right, Home, End, PgDn, PgUp, ...etc
 			switch (cmd)
 			{
 			case 71:	// Home

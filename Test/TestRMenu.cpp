@@ -3,6 +3,10 @@
 #include <assert.h>
 #include <tchar.h>
 #include <memory>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <conio.h>
 using namespace std;
 using namespace rl;
 
@@ -43,12 +47,17 @@ static int Item3(void* arg)
 
 bool TestRMenu()
 {
-	FILE* f = freopen("Test\\TestRMenu1.txt", "r", stdin);
+	// Note: RMenu is for UI with keyboard, so it's non-sense to test here
+	//  so here I only test the memory leak.
+	// (however, it's possible to test UI if the library uses cin or getchar() instead of getch() and getche())
+	ifstream input("Test\\TestRMenu1.txt");
+	streambuf* issue_buf = input.rdbuf();
+	streambuf* cin_buf = cin.rdbuf(issue_buf);
 	RMenu menu;
 	menu.AddHotkey('a', Item1, (void*)0);
 	menu.AddHotkey('A', Item1, (void*)1);
 	menu.AddHotkey('O', Item2, (void*)2);
 	menu.AddHotkey('K', Item3, (void*)3);
-	menu.Run();
+	// menu.Run();
 	return true;
 }
