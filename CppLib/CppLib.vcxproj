@@ -84,6 +84,7 @@
     <ClInclude Include="..\include\Rtchar.h" />
     <ClInclude Include="RMenuImp.h" />
     <ClInclude Include="RObjectImp.h" />
+    <ClInclude Include="snprintf.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

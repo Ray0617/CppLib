@@ -48,6 +48,9 @@
     <ClInclude Include="..\include\RMenu.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="snprintf.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RDatabase.cpp">

@@ -82,6 +82,7 @@ int RMenuT<T>::Run()
 	{
 		Show();
 		int cmd = _getche();
+		tcout << endl;
 		if (cmd == 224)
 		{
 			cmd = _getche();	// Up, Down, Left, Right, Home, End, PgDn, PgUp, ...etc

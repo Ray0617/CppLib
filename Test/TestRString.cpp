@@ -19,5 +19,7 @@ bool TestRString()
 	assert(ToTStr(str) == _T("test"));
 	assert(ToTStr(wcs) == _T("test"));
 	assert(ToTStr(tstr) == _T("test"));
+	assert(Sprintf("%s%d", str.c_str(), 1) == "test1");
+	assert(Sprintf(L"%s%d", wcs.c_str(), 2) == L"test2");
 	return true;
 }

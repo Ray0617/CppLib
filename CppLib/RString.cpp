@@ -2,7 +2,9 @@
 
 #include "RString.h"
 #include <memory>
+#include <stdio.h>
 #ifdef _WIN32
+#include "snprintf.h"
 #include <Windows.h>
 // just use WideCharToMultiByte and MultiByteToWideChar
 #else
@@ -78,6 +80,42 @@ std::wstring ToWcs(const std::string& str)
 std::wstring ToWcs(const std::wstring& wcs)
 {
 	return wcs;
+}
+
+std::string Sprintf(const char* fmt, ...)
+{
+	int len = 256;
+    va_list ap;
+    va_start(ap, fmt);
+	std::unique_ptr<char[]> str;
+	while (true)
+	{
+		len *= 2;
+		str = std::unique_ptr<char[]>(new char[len]);
+		auto ret = vsnprintf(str.get(), len, fmt, ap);
+		if (ret < len-1)
+			break;
+	}
+    va_end(ap);
+	return str.get();
+}
+
+std::wstring Sprintf(const wchar_t* fmt, ...)
+{
+	int len = 256;
+    va_list ap;
+    va_start(ap, fmt);
+	std::unique_ptr<wchar_t[]> wcs;
+	while (true)
+	{
+		len *= 2;
+		wcs = std::unique_ptr<wchar_t[]>(new wchar_t[len]);
+		auto ret = vsnwprintf(wcs.get(), len, fmt, ap);
+		if (ret < len-1)
+			break;
+	}
+    va_end(ap);
+	return wcs.get();
 }
 
 template <> 
