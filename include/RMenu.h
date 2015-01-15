@@ -20,7 +20,8 @@ public:
 	~RMenuT();
 	void SetItemWidth(unsigned width);
 	void SetSelect(unsigned select);
-	void Add(const T& name, MenuItemFuncPtr func, void* arg, int key, bool show = true);
+	void Add(const T& name, MenuItemFuncPtr func, void* arg);
+	void AddHotkey(int key, MenuItemFuncPtr func, void* arg);
 	void Run();
 private:
 	void Show();
@@ -28,11 +29,10 @@ private:
 	class RMenuItem
 	{
 	public:
-		RMenuItem(const T& name, MenuItemFuncPtr func, void* arg, bool show);
+		RMenuItem(const T& name, MenuItemFuncPtr func, void* arg);
 		T name;
 		MenuItemFuncPtr func;
 		void* arg;
-		bool show;
 		int Select();
 	};
 	std::map<int, std::shared_ptr<RMenuItem> > m_items_with_key;

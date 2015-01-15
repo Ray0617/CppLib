@@ -13,12 +13,12 @@ static const int MAX_CHARPERLINE = 80;
 static const int MAX_COLUMNS_PER_SCREEN = 50;
 
 template<typename T>
-RMenuT<T>::RMenuItem::RMenuItem(const T& _name, MenuItemFuncPtr _func, void* _arg, bool _show)
+RMenuT<T>::RMenuItem::RMenuItem(const T& _name, MenuItemFuncPtr _func, void* _arg)
 	: name(_name)
 	, func(_func)
 	, arg(_arg)
-	, show(_show)
-{}
+{
+}
 
 template<typename T>
 int RMenuT<T>::RMenuItem::Select()
@@ -53,11 +53,16 @@ void RMenuT<T>::SetSelect(unsigned select)
 }
 
 template<typename T>
-void RMenuT<T>::Add(const T& name, MenuItemFuncPtr func, void* arg, int key, bool show)
+void RMenuT<T>::Add(const T& name, MenuItemFuncPtr func, void* arg)
 {
-	shared_ptr<RMenuItem> item = make_shared<RMenuItem>(name, func, arg, show);
-	if (show)
-		m_items.push_back(item);
+	shared_ptr<RMenuItem> item = make_shared<RMenuItem>(name, func, arg);
+	m_items.push_back(item);
+}
+
+template<typename T>
+void RMenuT<T>::AddHotkey(int key, MenuItemFuncPtr func, void* arg)
+{
+	shared_ptr<RMenuItem> item = make_shared<RMenuItem>(_T(""), func, arg);
 	m_items_with_key[key] = item;
 }
 

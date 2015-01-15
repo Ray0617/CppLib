@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS		// freopen
 #include "RMenu.h"
 #include <assert.h>
 #include <tchar.h>
@@ -44,11 +45,10 @@ bool TestRMenu()
 {
 	FILE* f = freopen("Test\\TestRMenu1.txt", "r", stdin);
 	RMenu menu;
-	menu.Add(_T("Item1"), Item1, (void*)0, 'a');
-	menu.Add(_T("Item1"), Item1, (void*)1, 'A', false);	
-		// note: show = false so it could not be selected from direction arrow and enter in the main menu
-	menu.Add(_T("Item2"), Item2, (void*)2, 'O');
-	menu.Add(_T("Item3"), Item3, (void*)3, 'K');
+	menu.AddHotkey('a', Item1, (void*)0);
+	menu.AddHotkey('A', Item1, (void*)1);
+	menu.AddHotkey('O', Item2, (void*)2);
+	menu.AddHotkey('K', Item3, (void*)3);
 	menu.Run();
 	return true;
 }
