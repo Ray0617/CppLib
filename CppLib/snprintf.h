@@ -1,7 +1,7 @@
 #pragma once
 #include <stdarg.h>
 #include <stdio.h>
-// copy from http://stackoverflow.com/questions/2915672/snprintf-and-visual-studio-2010
+// ref http://stackoverflow.com/questions/2915672/snprintf-and-visual-studio-2010
 
 #ifdef _MSC_VER
 
